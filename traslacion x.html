@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head></head>
+
+<body>
+  <!--Load three.js-->
+  <script src="http://threejs.org/build/three.min.js"></script>
+  <script>
+    // code in here
+
+    
+
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+var renderer = new THREE.WebGLRenderer();
+
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x3b5998);
+document.body.appendChild(renderer.domElement);
+var x =0;
+var light = new THREE.PointLight(0xffffff, 1.2);
+scene.add(light);
+light.position.set(0, 3, 3);
+
+// Load the object 
+var loader = new THREE.JSONLoader().load("js/graficacionesmeralda.js", function(geometry, materials){
+  var material = new THREE.MultiMaterial(materials);
+  mesh = new THREE.Mesh(geometry, material);mesh.position.x = 5;
+  scene.add(mesh);
+});
+
+camera.position.z = 2;
+ 
+function render(){
+  requestAnimationFrame(render);
+ //     mesh.rotation.x += 0.1;
+ //   mesh.rotation.y += 0.1;
+ mesh.position.z = -5;
+
+if(x<300){
+     mesh.position.x -= .03;
+   x++}
+
+   else
+
+   {
+    x++
+     mesh.position.x += .03;
+   }
+
+   if(x > 600){x=0;}
+
+ //  mesh.position.z -= .01;
+  // mesh.position.z += .01;
+  // mesh.position.x -= .01;
+   //mesh.position.x += .01;
+   //mesh.position.y -= .01;
+   //mesh.position.y += .01;  
+  renderer.render(scene, camera);
+}
+render();
+
+
+
+
+  </script>
+</body>
+</html>
